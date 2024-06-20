@@ -7,8 +7,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import lombok.Data;
+
 @Entity
 @Table(name = "ROOM")
+@Data
 public class Room {
 
   @Id
@@ -22,25 +25,4 @@ public class Room {
 
   @Column(name = "BED_INFO") private String badInfo;
 
-  public long getId() { return id; }
-
-  public void setId(long id) { this.id = id; }
-
-  public String getName() { return name; }
-
-  public void setName(String name) { this.name = name; }
-
-  public String getRoomNumber() { return roomNumber; }
-
-  public void setRoomNumber(String roomNumber) { this.roomNumber = roomNumber; }
-
-  public String getBadInfo() { return badInfo; }
-
-  public void setBadInfo(String badInfo) { this.badInfo = badInfo; }
-
-  @Override
-  public String toString() {
-    return "Room [id=" + id + ", name=" + name + ", roomNumber=" + roomNumber +
-        ", badInfo=" + badInfo + "]";
-  }
 }
