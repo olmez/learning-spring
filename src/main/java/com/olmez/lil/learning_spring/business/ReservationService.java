@@ -51,12 +51,12 @@ public class ReservationService {
             roomReservation.setGuestId(guest.getGuestId());
         });
 
-        List<RoomReservation> roomReservationList = new ArrayList<>();
+        List<RoomReservation> roomReservations = new ArrayList<>();
         for (long id : roomReservationMap.keySet()) {
-            roomReservationList.add(roomReservationMap.get(id));
+            roomReservations.add(roomReservationMap.get(id));
         }
 
-        roomReservationList.sort(new Comparator<RoomReservation>() {
+        roomReservations.sort(new Comparator<RoomReservation>() {
             @Override
             public int compare(RoomReservation i1, RoomReservation i2) {
                 if (i1.getRoomName().equals(i2.getRoomName())) {
@@ -66,6 +66,22 @@ public class ReservationService {
             }
         });
 
-        return roomReservationList;
+        return roomReservations;
+    }
+
+    public List<Guest> getHotelGuests(){
+        Iterable<Guest> guests = this.guestRepository.findAll();
+        List<Guest> guestList = new ArrayList<>();
+        guests.forEach(guest->{guestList.add(guest);});
+        guestList.sort(new Comparator<Guest>() {
+            @Override
+            public int compare(Guest o1, Guest o2) {
+                if (o1.getLastName().equals(o2.getLastName())){
+                    return o1.getFirstName().compareTo(o2.getFirstName());
+                }
+                return o1.getLastName().compareTo(o2.getLastName());
+            }
+        });
+        return guestList;
     }
 }
